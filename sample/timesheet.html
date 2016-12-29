@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="timetable.js"></script>
+	<body ng-app="myapp" ng-controller="ListController">
+		<div>
+			<input type="text" id="date" vaue="" ng-model="clickDate"/>
+			(mm/dd/yyyy)
+			<input type="button" ng-click="getforDate()" value="get for date"/>
+		</div>
+		<div>
+
+		</div>
+		<input type="button" ng-click="prev()" value="prev"/>
+		<input type="button" ng-click="next()" value="next"/>
+		<table border="1">
+			<thead>
+				<tr >
+					<th>client</th><th>project</th>
+					<th ng-repeat="head in heads">{{head}}</th>
+					<th>Project total</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="timetable in timetables">
+					<td>
+					<input type="text" ng-model="timetable.client" style="width: 100px;"/>
+					</td><td>
+					<input type="text" ng-model="timetable.project" style="width: 150px;"/>
+					</td><td>
+					<input type="number" ng-model="timetable.sat" ng-change="udpatePerDayWork($index,'sat')" style="width: 30px;"/>
+					<input type="button" ng-click="openReviewBox($index,'satR')" />
+					</td><td>
+					<input type="number" ng-model="timetable.sun" ng-change="udpatePerDayWork($index,'sun')" style="width: 30px;"/>
+					<input type="button" ng-click="openReviewBox($index,'sunR')"/>
+					</td><td>
+					<input type="number" ng-model="timetable.mon" ng-change="udpatePerDayWork($index,'mon')" style="width: 30px;"/>
+					<input type="button" ng-click="openReviewBox($index,'monR')" />
+					</td><td>
+					<input type="number" ng-model="timetable.tue" ng-change="udpatePerDayWork($index,'tue')" style="width: 30px;"/>
+					<input type="button" ng-click="openReviewBox($index,'tueR')"/>
+					</td><td>
+					<input type="number" ng-model="timetable.wen" ng-change="udpatePerDayWork($index,'wen')" style="width: 30px;"/>
+					<input type="button" ng-click="openReviewBox($index,'wenR')"/>
+					</td><td>
+					<input type="number" ng-model="timetable.thu" ng-change="udpatePerDayWork($index,'thu')" style="width: 30px;"/>
+					<input type="button" ng-click="openReviewBox($index,'thuR')"/>
+					</td><td>
+					<input type="number" ng-model="timetable.fri" ng-change="udpatePerDayWork($index,'fri')" style="width: 30px;"/>
+					<input type="button" ng-click="openReviewBox($index,'friR')"/>
+					</td><td>{{timetable.sat+timetable.sun+timetable.mon+timetable.tue+timetable.wen+timetable.thu+timetable.fri | number}}</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>Day Total</td>
+					<td></td>
+					<td> {{rowTotal[0]}}</td>
+					<td> {{rowTotal[1]}}</td>
+					<td>{{rowTotal[2]}}</td>
+					<td> {{rowTotal[3]}}</td>
+					<td> {{rowTotal[4]}}</td>
+					<td> {{rowTotal[5]}}</td>
+					<td> {{rowTotal[6]}}</td>
+					<td>{{rowTotal[0]+rowTotal[1]+rowTotal[2]+rowTotal[3]+rowTotal[4]+rowTotal[5]+rowTotal[6]}}</td>
+				</tr>
+			</tfoot>
+		</table>
+		<div >
+			<input type="button"  value="Add" ng-click="add()">
+			<input type="button"  value="save" ng-click="save()">
+		</div>
+		<div  ng-hide="hideReviewPopup" >
+			<textarea ng-model="reviewNotes"></textarea>
+			<button ng-click="updateReview()">
+				update
+			</button>
+		</div><script></script>
+	</body>
+</html>

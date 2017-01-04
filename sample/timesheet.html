@@ -22,6 +22,7 @@
 					<th>Location</th>
 					<th ng-repeat="head in heads">{{head}}</th>
 					<th>Project total</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -37,27 +38,30 @@
 					</td>
 					<td>
 					<input type="text" ng-model="timetable.sat.time" ng-change="udpatePerDayWork($index,'sat')" style="width: 30px;"/>
-					<input type="button" ng-click="openReviewBox($index,'satR')" />
+					<input type="button" ng-click="openReviewBox($index,'sat')" />
 					</td><td>
 					<input type="text" ng-model="timetable.sun.time" ng-change="udpatePerDayWork($index,'sun')" style="width: 30px;"/>
-					<input type="button" ng-click="openReviewBox($index,'sunR')"/>
+					<input type="button" ng-click="openReviewBox($index,'sun')"/>
 					</td><td>
 					<input type="text" ng-model="timetable.mon.time" ng-change="udpatePerDayWork($index,'mon')" style="width: 30px;"/>
-					<input type="button" ng-click="openReviewBox($index,'monR')" />
+					<input type="button" ng-click="openReviewBox($index,'mon')" />
 					</td><td>
 					<input type="text" ng-model="timetable.tue.time" ng-change="udpatePerDayWork($index,'tue')" style="width: 30px;"/>
-					<input type="button" ng-click="openReviewBox($index,'tueR')"/>
+					<input type="button" ng-click="openReviewBox($index,'tue')"/>
 					</td><td>
 					<input type="text" ng-model="timetable.wed.time" ng-change="udpatePerDayWork($index,'wen')" style="width: 30px;"/>
-					<input type="button" ng-click="openReviewBox($index,'wenR')"/>
+					<input type="button" ng-click="openReviewBox($index,'wen')"/>
 					</td><td>
 					<input type="text" ng-model="timetable.thu.time" ng-change="udpatePerDayWork($index,'thu')" style="width: 30px;"/>
-					<input type="button" ng-click="openReviewBox($index,'thuR')"/>
+					<input type="button" ng-click="openReviewBox($index,'thu')"/>
 					</td><td>
 					<input type="text" ng-model="timetable.fri.time" ng-change="udpatePerDayWork($index,'fri')" style="width: 30px;"/>
-					<input type="button" ng-click="openReviewBox($index,'friR')"/>
+					<input type="button" ng-click="openReviewBox($index,'fri')"/>
 					</td><td>{{calculateTimePerWeek(timetable.sat.time,timetable.sun.time,timetable.mon.time,
 						timetable.tue.time,timetable.wed.time,timetable.thu.time,timetable.fri.time)}}</td>
+					<td>
+						<input type="button"  ng-click="remove($index)" style="width: 30px;" value="X"/> 
+					</td>	
 				</tr>
 			</tbody>
 			<tfoot>
@@ -68,12 +72,13 @@
 					<td></td>
 					<td> {{rowTotal[0]}}</td>
 					<td> {{rowTotal[1]}}</td>
-					<td>{{rowTotal[2]}}</td>
+					<td> {{rowTotal[2]}}</td>
 					<td> {{rowTotal[3]}}</td>
 					<td> {{rowTotal[4]}}</td>
 					<td> {{rowTotal[5]}}</td>
 					<td> {{rowTotal[6]}}</td>
 					<td>{{calculateTotalProject()}}</td>
+					<td></td>
 				</tr>
 			</tfoot>
 		</table>

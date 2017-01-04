@@ -45,6 +45,7 @@ function($scope, $http) {
 	$scope.rowTotal = [];
 	$scope.hideReviewPopup = true;
 	$scope.rowTotal = ['00:00', '00:00', '00:00', '00:00', '00:00', '00:00', '00:00'];
+	$scope.deletedIDs = [];
 	
 	$scope.add = function() {
 		$scope.addTimetablejsontoTimesheetArray();
@@ -179,13 +180,13 @@ function($scope, $http) {
 	$scope.openReviewBox = function(index, reviewDay) {
 		$scope.reviewIndex = index;
 		$scope.reviewDay = reviewDay;
-		$scope.reviewNotes = $scope.timetables[$scope.reviewIndex][$scope.reviewDay];
+		$scope.reviewNotes = $scope.timetables[$scope.reviewIndex][$scope.reviewDay].remark;
 		$scope.hideReviewPopup = false;
 	};
 	
 	//review popup close method.
 	$scope.updateReview = function() {
-		$scope.timetables[$scope.reviewIndex][$scope.reviewDay] = $scope.reviewNotes;
+		$scope.timetables[$scope.reviewIndex][$scope.reviewDay].remark = $scope.reviewNotes;
 		$scope.hideReviewPopup = true;
 	};
 	
@@ -204,6 +205,16 @@ function($scope, $http) {
 			}
 		);
 		
+	};
+	$scope.remove = function(index){
+		console.log(index);
+		
+		var time = $scope.timetables[index];
+		console.log(time);
+		if(time.client.id !=0){
+			$scope.deletedIDs.push(time);
+		}
+		$scope.timetables.splice(index, 1);
 	};
 	$scope.calculateTotalProject = function(){
 		return timeCalculation(
